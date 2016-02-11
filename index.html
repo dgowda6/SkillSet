@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="skill">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link rel="icon" href="favicon.ico">
+
+	<title>Skills</title>
+
+	<!-- Bootstrap core CSS -->
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="css/jumbotron-narrow.css" rel="stylesheet">
+	<link href="css/custom-css.css" rel="stylesheet">
+
+	<!-- Bootstrap Javasript file-->
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/angular.min.js"></script>
+    
+    <!-- Custom JQuery -->
+    <script type="text/javascript" src="js/custom-jquery.js"></script>
+
+	<!-- Skill JS-->
+	<script type="text/javascript" src="js/skill-index.js"></script>
+	
+
+</head>
+
+<body>
+
+	<div class="container" ng-controller="SkillController as skillCtrl">
+		<div class="header clearfix">
+			<nav>
+				<ul class="nav nav-pills pull-right">
+					<li role="presentation">
+						<a class="btn btn-success nav-button" role="button" data-toggle="modal" data-target="#addModal">
+							<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add
+						</a>
+					</li>
+				</ul>
+			</nav>
+			<h3 class="text-muted">Skills</h3>
+		</div>
+
+		<!-- put the list here-->
+		<div class="jumbotron">
+			<ul class="list-group">
+              <div ng-repeat="skill in skillCtrl.skill">
+				<a ng-click="skillCtrl.getSelectedSkill(skill)" class="list-group-item" role="button" data-toggle="modal" data-target="#displayModal" >
+					<span class="badge">{{skill.SkillPercentage}}%</span> {{skill.SkillName}}
+				</a>
+                </div>
+			</ul>
+		</div>
+
+
+
+		<!-- Add Modal -->
+		<div class="modal fade" id="addModal" role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Add a Skill</h4>
+					</div>
+					<div class="modal-body">
+						<form class="form-horizontal" name="formAddSkill" ng-controller="AddSkillController as addSkillCtrl" ng-submit="addSkillCtrl.addSkill(skillCtrl.skill)">
+							<fieldset>
+
+								<!-- Text input-->
+								<div class="form-group">
+									<label class="col-md-4 control-label" for="textSkill">Skill</label>
+									<div class="col-md-4">
+										<input ng-model="addSkillCtrl.skill.SkillName" id="textSkill" name="textSkill" type="text" placeholder="Java, Python, Ruby,." class="form-control input-md" required="">
+
+									</div>
+								</div>
+
+								<!-- Appended Input-->
+								<div class="form-group">
+									<label class="col-md-4 control-label" for="textPercentage">Expertise Percentage</label>
+									<div class="col-md-4">
+										<div class="input-group">
+											<input ng-model="addSkillCtrl.skill.SkillPercentage" id="textPercentage" name="textPercentage" class="form-control" placeholder="1 - 100" type="text" required="">
+											<span class="input-group-addon">%</span>
+										</div>
+
+									</div>
+								</div>
+								<!-- Button (Double) -->
+								<div class="form-group">
+									<label class="col-md-4 control-label" for="buttonSave"></label>
+									<div class="col-md-8">
+										<button type="submit" id="buttonSave" name="buttonSave" class="btn btn-success">Save</button>
+										<button id="buttonCancel" name="buttonCancel" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+									</div>
+								</div>
+
+							</fieldset>
+						</form>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<!-- Display Modal -->
+		<div class="modal fade" id="displayModal" role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Skill</h4>
+					</div>
+					<div class="modal-body" >
+						<h3>{{skillCtrl.displaySkill.SkillName}}</h3>
+						<h4>{{skillCtrl.displaySkill.SkillPercentage}}</h4>
+						<p>Highly Expertised. Had worked on many projects.</p>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<footer class="footer">
+			<p>&copy; 2015 Company, Inc.</p>
+		</footer>
+
+	</div>
+	<!-- /container -->
+
+</body>
+
+</html>

@@ -1,0 +1,6 @@
+.nav-button:hover,
+.nav-button:focus{
+    color: #5cb85c !important;
+    background-color: #fff !important;
+    border-color: #4cae4c !important;
+}
